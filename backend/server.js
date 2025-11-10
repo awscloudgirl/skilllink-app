@@ -25,6 +25,12 @@ app.use("/api/bookings", bookingRoutes);
 // Start server
 const PORT = process.env.PORT || 5000;
 
+app._router.stack.forEach(r => {
+  if (r.route && r.route.path) {
+    console.log("✅ Route:", r.route.path);
+  }
+});
+
 sequelize
   .sync({ alter: true })
   .then(() => {
